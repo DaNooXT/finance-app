@@ -16,8 +16,9 @@ class User (base):
     name = Column("name", String, nullable=False)
     password = Column("password", String, nullable=False)
 
-    def __init__ (self, name):
+    def __init__ (self, name, password):
         self.name = name
+        self.password = password
 
 
 class Movimentations (base):
