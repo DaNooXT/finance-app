@@ -14,6 +14,7 @@ class User (base):
 
     id = Column("id", Integer, primary_key=True, autoincrement=True, nullable=False)
     name = Column("name", String, nullable=False)
+    password = Column("password", String, nullable=False)
 
     def __init__ (self, name):
         self.name = name

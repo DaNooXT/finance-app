@@ -12,16 +12,17 @@ async def register (user: UserSchema, session: Session = Depends(create_session)
     existing_user = session.query(User).filter(User.name == user.name).first()
 
     if existing_user:
-        raise HTTPException(status_code=400, detail="Usuario existente")
+        raise HTTPException(status_code=400, detail="Existing user")
     
     try:
         new_user = User(name=user.name, password=user.password)
         session.add(new_user)
         session.commit()
         session.refresh(new_user)
-    except:
+    except Exception as e:
         session.rollback()
-        raise HTTPException(status_code=500, detail="Erro interno")
+        print(e)
+        raise HTTPException(status_code=500, detail="Internal error")
     
     return {
         "id": new_user.id,
