@@ -30,3 +30,23 @@ async def list_movimentation (session: Session = Depends(create_session)):
         HTTPException(status_code=500, detail="Internal erro")
 
     return all_movimentation
+
+
+@movimentation_route.put("/update_movimentation/{id}", response_model=ResponseMovimentation)
+async def update_movimentation (id: int, movimentation: MovimentationSchema, session: Session = Depends(create_session)):
+    movimentation_db = session.query(Movimentations).filter(Movimentations.id == id).first()
+
+    if not movimentation_db:
+        HTTPException(status_code=400, detail="Movimentation not found")
+
+    for key, value in movimentation.model_dump().items():
+        setattr(movimentation_db, key, value)
+
+    try:
+        session.commit()
+        session.refresh(movimentation_db)
+    except:
+        session.rollback()
+        raise HTTPException(status_code=500, detail="Internal error")
+
+    return movimentation_db
