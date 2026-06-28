@@ -16,3 +16,4 @@ class ExpenseCategory (str, Enum):
     PETS = "pets"
     GIFTS = "gifts"
     OTHERS = "others"
+    SALARY = "salary"
