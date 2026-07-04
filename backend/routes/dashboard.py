@@ -38,21 +38,21 @@ async def get_dashboard_month (session: Session = Depends(create_session)):
             movimentation.amount
             for movimentation in all_movimentation
             if movimentation.movimentation_type == MovimentationType.EXPENSE
-            and type == category
+            and movimentation.type == category
         )
 
         percentage = (
             (expense * 100 / total_expense)
-            if expense > 0 
+            if total_expense > 0 
             else 0
         )
 
         categories[category.value] = {
             "expense": expense,
-            "percentege": percentage
+            "percentage": percentage
         }
 
-    len_movimentation = len(all_movimentation)
+    total_movimentation = len(all_movimentation)
 
     top_movimentation =  max(
         (
@@ -73,7 +73,16 @@ async def get_dashboard_month (session: Session = Depends(create_session)):
         },
         "categories" : categories,
         "statistics": {
-            "len_movimentation": len_movimentation,
-            "top_movimentation": top_movimentation
+            "total_movimentation": total_movimentation,
+            "top_movimentation": (
+                {
+                    "description": top_movimentation.description,
+                    "amount": top_movimentation.amount,
+                    "category": top_movimentation.type,
+                    "date": top_movimentation.movimentation_date,
+                }
+                if top_movimentation
+                else None
+            )
         }
     }
