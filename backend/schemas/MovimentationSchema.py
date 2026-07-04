@@ -1,5 +1,5 @@
 from pydantic import BaseModel 
-from backend.database.enums import ExpenseCategory, MovimentationType
+from backend.database.enums import MovimentationCategories, MovimentationType
 from decimal import Decimal
 from datetime import datetime
 
@@ -7,7 +7,7 @@ class MovimentationSchema (BaseModel):
     user_id: int
     amount: Decimal
     description: str
-    type: ExpenseCategory
+    type: MovimentationCategories
     movimentation_type: MovimentationType
 
     class Config:
@@ -18,7 +18,7 @@ class ResponseMovimentation (BaseModel):
     user_id: int
     amount: Decimal
     description: str
-    type: ExpenseCategory
+    type: MovimentationCategories
     movimentation_type: MovimentationType
     movimentation_date: datetime
 

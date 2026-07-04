@@ -5,7 +5,7 @@ class MovimentationType (str, Enum):
     EXPENSE = "expense"
 
 
-class ExpenseCategory (str, Enum):
+class MovimentationCategories (str, Enum):
     FOOD = "food"
     TRANSPORT = "transport"
     HOUSE = "house"

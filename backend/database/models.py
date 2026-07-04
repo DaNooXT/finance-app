@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, create_engine, Enum as SAEnum, Numeric, ForeignKey, func, DateTime
 from sqlalchemy.orm import declarative_base
-from backend.database.enums import ExpenseCategory, MovimentationType
+from backend.database.enums import MovimentationCategories, MovimentationType
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -28,7 +28,7 @@ class Movimentations (base):
     user_id = Column("user_id", Integer, ForeignKey("users.id"), nullable=False)
     amount = Column("amount", Numeric(10, 2), nullable=False)
     description = Column("description", String, nullable=False)
-    type = Column("type", SAEnum(ExpenseCategory), nullable=False)
+    type = Column("type", SAEnum(MovimentationCategories), nullable=False)
     movimentation_type = Column("movimentation_type", SAEnum(MovimentationType), nullable=False)
     movimentation_date = Column("movimentation_date", DateTime(timezone=True), server_default=func.now(), nullable=False)
 
