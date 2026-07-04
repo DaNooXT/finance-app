@@ -17,22 +17,16 @@ async def get_dashboard_month (session: Session = Depends(create_session)):
         Movimentations.movimentation_date < end
         ).all()
     
-    income = 0
-    expense = 0
+    total_income = 0
+    total_expense = 0
 
     for movimentation in all_movimentation:
         if movimentation.movimentation_type == MovimentationType.INCOME:
-            income = income + movimentation.amount
+            total_income = total_income + movimentation.amount
         elif movimentation.movimentation_type == MovimentationType.EXPENSE:
-            expense = expense + movimentation.amount
+            total_expense = total_expense + movimentation.amount
 
-    month_balence = income - expense
-
-    total_expense = sum(
-        movimentation.amount
-        for movimentation in all_movimentation
-        if movimentation.movimentation_type == MovimentationType.EXPENSE
-        )
+    month_balence = total_income - total_expense
 
     food_expense = sum(
         movimentation.amount                
@@ -168,6 +162,7 @@ async def get_dashboard_month (session: Session = Depends(create_session)):
     "all_movimentation": all_movimentation,
     "month_balence": month_balence,
     "total_expense": total_expense,
+    "total_income": total_income,
 
     "food_expense": food_expense,
     "food_porcent_expense": food_porcent_expense,
