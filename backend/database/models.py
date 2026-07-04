@@ -4,7 +4,7 @@ from backend.database.enums import MovimentationCategories, MovimentationType
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATABASE_URL = f"sqlite:///{BASE_DIR}/banck.db"
+DATABASE_URL = f"sqlite:///{BASE_DIR}/bank.db"
 db = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 
 base = declarative_base()
@@ -14,10 +14,12 @@ class User (base):
 
     id = Column("id", Integer, primary_key=True, autoincrement=True, nullable=False)
     name = Column("name", String, nullable=False)
+    email = Column("email", String, nullable=False)
     password = Column("password", String, nullable=False)
 
-    def __init__ (self, name, password):
+    def __init__ (self, name, email,password):
         self.name = name
+        self.email = email
         self.password = password
 
 
