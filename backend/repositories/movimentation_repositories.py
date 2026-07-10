@@ -15,6 +15,18 @@ class MovimentationRepository:
             self.session.rollback()
         return movimentation
     
+
     def get_all_movimentations (self):
         all_movimentation = self.session.query(Movimentations).all()
         return all_movimentation
+    
+
+    def get_movimentation_by_id (self, id):
+        existing_movimentation = self.session.query(Movimentations).filter(Movimentations.id == id).first()
+        return existing_movimentation
+    
+
+    def delete_movimentation (self, movimentation):
+        self.session.delete(movimentation)
+        self.session.commit()
+        return {"msg": "movimentation delete successfuly"}

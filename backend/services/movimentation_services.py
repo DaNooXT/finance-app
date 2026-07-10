@@ -24,6 +24,7 @@ class MovimentationServices:
 
         return self.repository.create_movimentation(new_movimentation)
     
+
     def show_all_movimentations (self):
         try:
             all_movimentations = self.repository.get_all_movimentations()
@@ -32,3 +33,16 @@ class MovimentationServices:
             raise HTTPException(status_code=400, detail="Was not possible get all movimentations")
         return all_movimentations
         
+
+    def pinto (self, id):
+        existing_movimentation = self.repository.get_movimentation_by_id(id)
+
+        if not existing_movimentation:
+            raise HTTPException(status_code=400, detail="Movimentation not found")
+        
+        try:
+            self.repository.delete_movimentation(existing_movimentation)
+        except Exception:
+            raise HTTPException(status_code=500, detail="Internal several error")
+        
+        return {"msg": "movimentation delete successfuly"}

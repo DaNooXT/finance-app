@@ -42,17 +42,5 @@ async def update_movimentation (id: int, movimentation: MovimentationSchema, ses
 
 @movimentation_route.delete("/delete_movimentation/{id}")
 async def delete_movimentation (id: int, session: Session = Depends(create_session)):
-    movimentation_db = session.query(Movimentations).filter(Movimentations.id == id).first()
-
-    if not movimentation_db:
-        raise HTTPException(status_code=400, detail="Movimentation not found")
-
-    try: 
-        session.delete(movimentation_db)
-        session.commit()
-    except Exception as e:
-        session.rollback()
-        print(e)
-        raise HTTPException(status_code=500, detail="Internal error")
-    
-    return {"msg": "Movimentation delete successfuly"}
+    service = MovimentationServices(session)
+    return service.pinto(id)
