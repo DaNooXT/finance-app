@@ -30,3 +30,11 @@ class MovimentationRepository:
         self.session.delete(movimentation)
         self.session.commit()
         return {"msg": "movimentation delete successfuly"}
+    
+
+    def update_movimentation (self, movimentation, movimentation_db):
+        for key, value in movimentation.model_dump().items():
+            setattr(movimentation_db, key, value)
+        self.session.commit()
+        self.session.refresh(movimentation_db)
+        return movimentation_db

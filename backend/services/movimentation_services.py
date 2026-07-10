@@ -9,7 +9,6 @@ class MovimentationServices:
         self.repository = MovimentationRepository(session)
 
     def add_new_movimentation (self, movimentation):
-
         try:
             new_movimentation = Movimentations(
                 user_id=movimentation.user_id,
@@ -21,7 +20,6 @@ class MovimentationServices:
         except Exception as e:
             print(e)
             raise HTTPException(status_code=400, detail="Error to add new movimentation")
-
         return self.repository.create_movimentation(new_movimentation)
     
 
@@ -34,15 +32,24 @@ class MovimentationServices:
         return all_movimentations
         
 
-    def pinto (self, id):
+    def remove_movimentation(self, id):
         existing_movimentation = self.repository.get_movimentation_by_id(id)
-
         if not existing_movimentation:
             raise HTTPException(status_code=400, detail="Movimentation not found")
-        
         try:
             self.repository.delete_movimentation(existing_movimentation)
         except Exception:
             raise HTTPException(status_code=500, detail="Internal several error")
-        
         return {"msg": "movimentation delete successfuly"}
+
+    
+    def update_movimentation (self, id, movimentation):
+        movimentation_db = self.repository.get_movimentation_by_id(id)
+        if movimentation_db is None:
+            raise HTTPException(status_code=404, detail="Movimentation not found")
+        try:
+            self.repository.update_movimentation(movimentation, movimentation_db)
+        except Exception as e:
+            print(e)
+            raise HTTPException(status_code=500, detail="Internal serveral error")
+        return movimentation_db
