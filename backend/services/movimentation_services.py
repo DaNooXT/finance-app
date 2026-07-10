@@ -23,4 +23,12 @@ class MovimentationServices:
             raise HTTPException(status_code=400, detail="Error to add new movimentation")
 
         return self.repository.create_movimentation(new_movimentation)
+    
+    def show_all_movimentations (self):
+        try:
+            all_movimentations = self.repository.get_all_movimentations()
+        except Exception as e:
+            print(e)
+            raise HTTPException(status_code=400, detail="Was not possible get all movimentations")
+        return all_movimentations
         

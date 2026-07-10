@@ -13,16 +13,11 @@ async def add_movimentation (movimentation: MovimentationSchema, session: Sessio
     service = MovimentationServices(session)
     return service.add_new_movimentation(movimentation)
 
+
 @movimentation_route.get("/list_movimentation", response_model=List[ResponseMovimentation])
 async def list_movimentation (session: Session = Depends(create_session)):
-    try:
-        all_movimentation = session.query(Movimentations).all()
-    except Exception as e :
-        session.rollback()
-        print(e)
-        HTTPException(status_code=500, detail="Internal erro")
-
-    return all_movimentation
+    service = MovimentationServices(session)
+    return service.show_all_movimentations()
 
 
 @movimentation_route.put("/update_movimentation/{id}", response_model=ResponseMovimentation)

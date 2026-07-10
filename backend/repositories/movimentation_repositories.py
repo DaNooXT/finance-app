@@ -7,12 +7,14 @@ class MovimentationRepository:
         self.session = session
 
     def create_movimentation (self, movimentation: Movimentations):
-
         try:
             self.session.add(movimentation)
             self.session.commit()
             self.session.refresh(movimentation)
         except Exception:
             self.session.rollback()
-
         return movimentation
+    
+    def get_all_movimentations (self):
+        all_movimentation = self.session.query(Movimentations).all()
+        return all_movimentation
