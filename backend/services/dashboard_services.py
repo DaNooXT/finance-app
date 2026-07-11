@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from backend.repositories.dashboard_repositories import DashboardRepository
-from backend.utils.date import get_current_time
+from backend.utils.date import get_current_month
 
 class DashboardService:
      
@@ -9,7 +9,7 @@ class DashboardService:
     
 
     def dashboard (self):
-        initial, end = get_current_time()
+        initial, end = get_current_month()
         all_movimentations = self.repository.get_movimentations_by_date(initial, end)
         summary = self.repository.calculate_summray(all_movimentations)
         expenses_category_porcentage = self.repository.get_categoty_porcentage_expenses(all_movimentations, summary["total_expense"])
@@ -28,6 +28,25 @@ class DashboardService:
                 )
             }
         }
+    
 
+    def dashboard_all (self):
+        initial, end = self.repository.get_period()
+        all_movimentations = self.repository.get_movimentations_by_date(initial, end)
+        summary = self.repository.calculate_summray(all_movimentations)
+        expenses_category_porcentage = self.repository.get_categoty_porcentage_expenses(all_movimentations, summary["total_expense"])
+        total_movimentations = self.repository.get_movimentations_len(all_movimentations)
+        top_movimentation = self.repository.get_top_movimentation(all_movimentations)
 
-
+        return {
+            "summary": summary,
+            "category": expenses_category_porcentage,
+            "statistics": {
+                "total_movimentations": total_movimentations,
+                "top_movimentation": (
+                    top_movimentation
+                    if top_movimentation
+                    else None
+                )
+            }
+        }

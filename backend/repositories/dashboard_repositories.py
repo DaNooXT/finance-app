@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import asc, desc
 from backend.database.models import Movimentations
 from backend.database.enums import MovimentationCategories, MovimentationType
 
@@ -19,7 +20,7 @@ class DashboardRepository:
         return (
             self.session.query(Movimentations)
             .filter(Movimentations.movimentation_date >= initial,
-            Movimentations.movimentation_date < end)
+            Movimentations.movimentation_date <= end)
             .all() 
         )
     
@@ -87,3 +88,22 @@ class DashboardRepository:
         )
 
         return top_movimentation
+
+
+    def get_period(self):
+        first = (
+            self.session.query(Movimentations)
+            .order_by(asc(Movimentations.movimentation_date))
+            .first()
+        )
+
+        last = (
+            self.session.query(Movimentations)
+            .order_by(desc(Movimentations.movimentation_date))
+            .first()
+        )
+
+        if first is None:
+            return None, None
+
+        return first.movimentation_date, last.movimentation_date

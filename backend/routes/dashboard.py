@@ -5,7 +5,12 @@ from backend.services.dashboard_services import DashboardService
 
 dashboard_route = APIRouter(prefix="/dashboard", tags=["dashboard"])
 
-@dashboard_route.get("/get_dashboard/month")
+@dashboard_route.get("/dashboard/month")
 async def get_dashboard_month (session: Session = Depends(create_session)):
     service = DashboardService(session)
     return service.dashboard()
+
+@dashboard_route.get("/dashboard")
+async def get_dashboard (session: Session = Depends(create_session)):
+    service = DashboardService(session)
+    return service.dashboard_all()

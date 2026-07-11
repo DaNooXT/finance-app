@@ -1,6 +1,6 @@
 from datetime import datetime
 
-def get_current_time ():
+def get_current_month ():
     today = datetime.now()
 
     initial = datetime(today.year, today.month, 1)
