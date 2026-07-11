@@ -8,12 +8,9 @@ class AuthService:
         self.repository = AuthRepository(session)
     
     def register (self, user):
-
         existing_user = self.repository.get_user_by_email(user.email)
-
         if existing_user:
-            HTTPException(status_code=400, detail="Existing user")
-        
+            HTTPException(status_code=400, detail="Existing user")       
         try:
             new_user = self.repository.create_user(
                 user.name,
@@ -21,10 +18,10 @@ class AuthService:
                 user.password
             )
         except Exception:
-            HTTPException(status_code=500, detail="Internal error")
-
+            raise HTTPException(status_code=500, detail="Internal error")
         return {
-            "id": existing_user.id,
-            "name": existing_user.name,
+            "id": new_user.id,
+            "name": new_user.name,
+            "email": new_user.email,
             "description": "User successfully registered"
         }
