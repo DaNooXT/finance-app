@@ -22,6 +22,6 @@ class AuthRepository:
 
         self.session.add(user)
         self.session.commit()
-        self.session.refresh()
+        self.session.refresh(user)
 
         return user

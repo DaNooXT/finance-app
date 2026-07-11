@@ -17,7 +17,8 @@ class AuthService:
                 user.email,
                 user.password
             )
-        except Exception:
+        except Exception as e :
+            print(e)
             raise HTTPException(status_code=500, detail="Internal error")
         return {
             "id": new_user.id,
