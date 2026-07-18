@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from backend.repositories.dashboard_repositories import DashboardRepository
 from backend.utils.date import get_current_month
@@ -9,12 +10,15 @@ class DashboardService:
     
 
     def dashboard (self):
-        initial, end = get_current_month()
-        all_movimentations = self.repository.get_movimentations_by_date(initial, end)
-        summary = self.repository.calculate_summray(all_movimentations)
-        expenses_category_porcentage = self.repository.get_categoty_porcentage_expenses(all_movimentations, summary["total_expense"])
-        total_movimentations = self.repository.get_movimentations_len(all_movimentations)
-        top_movimentation = self.repository.get_top_movimentation(all_movimentations)
+        try:
+            initial, end = get_current_month()
+            all_movimentations = self.repository.get_movimentations_by_date(initial, end)
+            summary = self.repository.calculate_summray(all_movimentations)
+            expenses_category_porcentage = self.repository.get_categoty_porcentage_expenses(all_movimentations, summary["total_expense"])
+            total_movimentations = self.repository.get_movimentations_len(all_movimentations)
+            top_movimentation = self.repository.get_top_movimentation(all_movimentations)
+        except Exception:
+            raise HTTPException(status_code=500, detail="Internal several error")
 
         return {
             "summary": summary,
@@ -31,12 +35,15 @@ class DashboardService:
     
 
     def dashboard_all (self):
-        initial, end = self.repository.get_period()
-        all_movimentations = self.repository.get_movimentations_by_date(initial, end)
-        summary = self.repository.calculate_summray(all_movimentations)
-        expenses_category_porcentage = self.repository.get_categoty_porcentage_expenses(all_movimentations, summary["total_expense"])
-        total_movimentations = self.repository.get_movimentations_len(all_movimentations)
-        top_movimentation = self.repository.get_top_movimentation(all_movimentations)
+        try:
+            initial, end = self.repository.get_period()
+            all_movimentations = self.repository.get_movimentations_by_date(initial, end)
+            summary = self.repository.calculate_summray(all_movimentations)
+            expenses_category_porcentage = self.repository.get_categoty_porcentage_expenses(all_movimentations, summary["total_expense"])
+            total_movimentations = self.repository.get_movimentations_len(all_movimentations)
+            top_movimentation = self.repository.get_top_movimentation(all_movimentations)
+        except Exception:
+            raise HTTPException(status_code=500, detail="Internal several error")
 
         return {
             "summary": summary,
