@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import '../src/App.jsx'
-import { register } from '../sr/pages/Register'
+import Register from './pages/Register/Register.jsx'
 
 function App() {
   return (
-    <>
-    </>
+    <Register />
   )
 }
 

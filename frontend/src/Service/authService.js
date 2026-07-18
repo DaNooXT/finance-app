@@ -1,5 +1,5 @@
 export async function login (email, password) {
-    const response = await fetch("http://localhost:8000/login", {
+    const response = await fetch("http://127.0.0.1:8000/auth/login", {
         method: "POST",
         headers: {
             "content-type": "application/json"
@@ -15,7 +15,7 @@ export async function login (email, password) {
 }
 
 export async function register (name, email, password) {
-    const response = await fetch("http://localhost:8000/register", {
+    const response = await fetch("http://127.0.0.1:8000/auth/register", {
         method: "POST",
         headers: {
             "content-type": "application/json"
