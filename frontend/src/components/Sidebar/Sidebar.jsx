@@ -19,8 +19,8 @@ export default function Sidebar({ open, onClose }) {
       {open && <div className={styles.backdrop} onClick={onClose} />}
       <aside className={`${styles.sidebar} ${open ? styles.open : ''}`}>
         <div className={styles.brand}>
-          <span className={styles.brandMark}>F</span>
-          <span className={styles.brandName}>Finovo</span>
+          <span className={styles.brandMark}>R</span>
+          <span className={styles.brandName}>Raul's App</span>
         </div>
 
         <nav className={styles.nav}>

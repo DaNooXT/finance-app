@@ -9,26 +9,26 @@ from database.models import User
 auth_route = APIRouter(prefix="/auth", tags=["auth"])
 
 @auth_route.post("/register", response_model=ResponseUser)
-async def register (user: UserSchema, session: Session = Depends(get_db)):
-    service = AuthService(session)
-    return service.register(user)
+async def register (current_user: UserSchema, session: Session = Depends(get_db)):
+    service = AuthService(current_user, session)
+    return service.register(current_user)
 
 @auth_route.post ("/login")
-async def login (user: UserLogin, session: Session = Depends(get_db)):
-    service = AuthService(session)
-    return service.login(user)
+async def login (current_user: UserLogin, session: Session = Depends(get_db)):
+    service = AuthService(current_user, session)
+    return service.login(current_user)
 
 @auth_route.post ("/refresh")
-async def refresh (user: User = Depends(get_current_user), session: Session = Depends(get_db)):
-    service = AuthService(session)
-    return service.refresh(user)
+async def refresh (current_user: User = Depends(get_current_user), session: Session = Depends(get_db)):
+    service = AuthService(current_user, session)
+    return service.refresh(current_user)
 
 @auth_route.post ("/login-form")
-async def login_form (user: OAuth2PasswordRequestForm = Depends(), session: Session = Depends(get_db)):
-    service = AuthService(session)
-    return service.login_form(user)
+async def login_form (current_user: OAuth2PasswordRequestForm = Depends(), session: Session = Depends(get_db)):
+    service = AuthService(current_user, session)
+    return service.login_form(current_user)
 
-@auth_route.delete ("/delete_user/{id}")
-async def delete_user (id: int, session: Session = Depends(get_db)):
-    service = AuthService(session)
-    return service.delete_user(id)
+@auth_route.delete ("/{id}")
+async def delete_user (id: int, current_user: User = Depends(get_current_user), session: Session = Depends(get_db)):
+    service = AuthService(current_user, session)
+    return service.delete_user(id, current_user)

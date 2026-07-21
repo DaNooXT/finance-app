@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import DashboardYear from './pages/DashboardYear/DashboardYear';
 import Movimentations from './pages/Movimentations/Movimentations';
 import Profile from './pages/Profile/Profile';
+import SecretImage from "./components/SecretImage/SecretImage";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       <ToastProvider>
         <AuthProvider>
           <BrowserRouter>
+          <SecretImage />
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

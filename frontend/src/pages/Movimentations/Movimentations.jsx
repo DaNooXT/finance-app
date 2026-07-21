@@ -34,15 +34,22 @@ export default function Movimentations() {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   async function loadData() {
-    setLoading(true);
-    const res = await MovimentationService.getMovimentations(filters);
-    setResult(res);
-    setLoading(false);
+      setLoading(true);
+
+      const res = await MovimentationService.getMovimentations(filters);
+
+      setResult({
+        items: res,
+        total: res.length,
+        totalPages: 1,
+        page: 1
+      });
+
+      setLoading(false);
   }
 
   useEffect(() => {
     loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   function openCreate() {

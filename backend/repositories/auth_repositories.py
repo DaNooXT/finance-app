@@ -4,7 +4,8 @@ from core.security import crypt_context
 
 class AuthRepository:
 
-    def __init__ (self, session: Session):
+    def __init__ (self, current_user, session: Session):
+        self.current_user = current_user
         self.session = session
 
     def get_user_by_email (self, email: str): 
@@ -14,10 +15,13 @@ class AuthRepository:
             .first()
         )
     
-    def get_user_by_id (self, id: int): 
+    def get_user_by_id (self, id: int, user_id: int): 
         return (
         self.session.query(User)
-        .filter(User.id == id)
+        .filter(
+            User.id == id,
+            User.id == user_id
+        )
         .first()
     )
     

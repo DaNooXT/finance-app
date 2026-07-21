@@ -8,13 +8,13 @@ from datetime import timedelta
 
 class AuthService:
 
-    def __init__(self, session: Session):
-        self.repository = AuthRepository(session)
+    def __init__(self, current_user, session: Session):
+        self.repository = AuthRepository(current_user, session)
     
     def register (self, user):
         existing_user = self.repository.get_user_by_email(user.email)
         if existing_user:
-            HTTPException(status_code=400, detail="Existing user")       
+            raise HTTPException(status_code=400, detail="Existing user")       
         try:
             new_user = self.repository.create_user(
                 user.name,
@@ -71,8 +71,8 @@ class AuthService:
             "token_type": "bearer"
         }
     
-    def delete_user (self, id):
-        existing_user = self.repository.get_user_by_id(id)
+    def delete_user (self, id, current_user):
+        existing_user = self.repository.get_user_by_id(id, current_user.id)
         try:
             self.repository.delete_user(existing_user)
         except Exception as e :

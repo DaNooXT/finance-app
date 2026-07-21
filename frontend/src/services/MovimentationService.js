@@ -7,6 +7,8 @@ const MovimentationService = {
       params: filters,
     });
 
+    console.log(data)
+
     return data;
   },
 

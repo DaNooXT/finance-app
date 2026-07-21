@@ -4,7 +4,8 @@ from database.models import Movimentations, User
 
 class MovimentationRepository:
 
-    def __init__ (self, session: Session):
+    def __init__ (self, current_user, session: Session):
+        self.current_user = current_user
         self.session = session
 
     def create_movimentation (self, movimentation: Movimentations):
@@ -25,8 +26,15 @@ class MovimentationRepository:
         return all_movimentation
     
 
-    def get_movimentation_by_id (self, id):
-        existing_movimentation = self.session.query(Movimentations).filter(Movimentations.id == id).first()
+    def get_movimentation_by_id (self, id, user_id):
+        existing_movimentation = (
+            self.session.query(Movimentations)
+            .filter (
+                Movimentations.id == id,
+                Movimentations.user_id == user_id
+            )
+            .first()
+            )
         return existing_movimentation
     
 

@@ -1,11 +1,3 @@
-/* ==========================================================================
-   Finovo — Design Tokens
-   Display/heading face: "Space Grotesk" — geometric, confident, great for
-   large monetary figures (tabular numerals) and section titles.
-   Body/UI face: "Inter" — the fintech-standard workhorse, quiet at small
-   sizes, excellent legibility in dense tables.
-   ========================================================================== */
-
 :root {
   --font-display: 'Space Grotesk', 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;

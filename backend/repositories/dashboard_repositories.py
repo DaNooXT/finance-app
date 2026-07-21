@@ -5,7 +5,8 @@ from database.enums import MovimentationCategories, MovimentationType
 
 class DashboardRepository:
 
-    def __init__ (self, session: Session):
+    def __init__ (self, current_user, session: Session):
+        self.current_user = current_user
         self.session = session
 
 
@@ -16,13 +17,20 @@ class DashboardRepository:
         )
 
 
-    def get_movimentations_by_date (self, initial, end):
-        return (
-            self.session.query(Movimentations)
-            .filter(Movimentations.movimentation_date >= initial,
-            Movimentations.movimentation_date <= end)
-            .all() 
-        )
+    def get_movimentations_by_date (self, initial, end, user_id):
+        if initial is None:
+            all_movimentations = []
+        else:
+            all_movimentations = (
+                self.session.query(Movimentations)
+                .filter(
+                Movimentations.user_id == user_id,
+                Movimentations.movimentation_date >= initial,
+                Movimentations.movimentation_date <= end)
+                .all() 
+            )
+
+        return all_movimentations
     
 
     def calculate_summray (self, all_movimentation):
@@ -90,15 +98,17 @@ class DashboardRepository:
         return top_movimentation
 
 
-    def get_period(self):
+    def get_period(self, user_id):
         first = (
             self.session.query(Movimentations)
+            .filter(Movimentations.user_id == user_id)
             .order_by(asc(Movimentations.movimentation_date))
             .first()
         )
 
         last = (
             self.session.query(Movimentations)
+            .filter(Movimentations.user_id == user_id)
             .order_by(desc(Movimentations.movimentation_date))
             .first()
         )

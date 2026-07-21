@@ -5,8 +5,8 @@ from database.models import Movimentations
 
 class MovimentationServices:
 
-    def __init__ (self, session: Session):
-        self.repository = MovimentationRepository(session)
+    def __init__ (self, current_user, session: Session):
+        self.repository = MovimentationRepository(current_user, session)
 
     def add_new_movimentation (self, movimentation, current_user):
         try:
@@ -16,6 +16,7 @@ class MovimentationServices:
                 description=movimentation.description,
                 type=movimentation.type,
                 movimentation_type=movimentation.movimentation_type,
+                movimentation_date=movimentation.movimentation_date
             )
         except Exception as e:
             print(e)
@@ -32,8 +33,8 @@ class MovimentationServices:
         return all_movimentations
         
 
-    def remove_movimentation(self, id):
-        existing_movimentation = self.repository.get_movimentation_by_id(id)
+    def remove_movimentation(self, id, current_user):
+        existing_movimentation = self.repository.get_movimentation_by_id(id, current_user.id)
         if not existing_movimentation:
             raise HTTPException(status_code=400, detail="Movimentation not found")
         try:
@@ -43,8 +44,8 @@ class MovimentationServices:
         return {"msg": "movimentation delete successfuly"}
 
     
-    def update_movimentation (self, id, movimentation):
-        movimentation_db = self.repository.get_movimentation_by_id(id)
+    def update_movimentation (self, id, movimentation, current_user):
+        movimentation_db = self.repository.get_movimentation_by_id(id, current_user.id)
         if movimentation_db is None:
             raise HTTPException(status_code=404, detail="Movimentation not found")
         try:

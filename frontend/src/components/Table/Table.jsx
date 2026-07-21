@@ -5,6 +5,7 @@ import Skeleton from '../Skeleton/Skeleton';
 import styles from './Table.module.css';
 
 export default function Table({ items, loading, onEdit, onDelete, simple = false }) {
+
   if (loading) {
     return (
       <div className={styles.wrap}>
@@ -24,7 +25,13 @@ export default function Table({ items, loading, onEdit, onDelete, simple = false
   }
 
   if (!items?.length) {
-    return <EmptyState icon="bi-receipt" title="Nenhuma movimentação encontrada" description="Ajuste os filtros ou cadastre uma nova movimentação." />;
+    return (
+      <EmptyState
+        icon="bi-receipt"
+        title="Nenhuma movimentação encontrada"
+        description="Ajuste os filtros ou cadastre uma nova movimentação."
+      />
+    );
   }
 
   return (
@@ -37,48 +44,95 @@ export default function Table({ items, loading, onEdit, onDelete, simple = false
             {!simple && <th>Tipo</th>}
             <th>Valor</th>
             <th>Data</th>
-            {(onEdit || onDelete) && <th className={styles.actionsCol}>Ações</th>}
+            {(onEdit || onDelete) && (
+              <th className={styles.actionsCol}>
+                Ações
+              </th>
+            )}
           </tr>
         </thead>
+
         <tbody>
           {items.map((item) => {
-            const cat = getCategory(item.category);
+
+            // API retorna a categoria no campo "type"
+            const cat = getCategory(item.type);
+
+            // API retorna income/expense
+            const isIncome = item.movimentation_type === 'income';
+
             return (
               <tr key={item.id}>
-                <td className={styles.description}>{item.description}</td>
+
+                <td className={styles.description}>
+                  {item.description}
+                </td>
+
                 <td>
                   <span className={styles.catBadge}>
-                    <span className={styles.dot} style={{ background: cat.color }} />
+                    <span
+                      className={styles.dot}
+                      style={{ background: cat.color }}
+                    />
                     {cat.label}
                   </span>
                 </td>
+
                 {!simple && (
                   <td>
-                    <span className={`${styles.typeBadge} ${item.type === 'receita' ? styles.income : styles.expense}`}>
-                      {item.type === 'receita' ? 'Receita' : 'Despesa'}
+                    <span
+                      className={`${styles.typeBadge} ${
+                        isIncome
+                          ? styles.income
+                          : styles.expense
+                      }`}
+                    >
+                      {isIncome ? 'Receita' : 'Despesa'}
                     </span>
                   </td>
                 )}
-                <td className={`${styles.value} tabular-nums ${item.type === 'receita' ? styles.income : ''}`}>
-                  {item.type === 'receita' ? '+' : '-'} {formatCurrency(item.value)}
+
+                <td
+                  className={`${styles.value} tabular-nums ${
+                    isIncome ? styles.income : ''
+                  }`}
+                >
+                  {isIncome ? '+' : '-'}{' '}
+                  {formatCurrency(item.amount)}
                 </td>
-                <td className={styles.date}>{formatDate(item.date)}</td>
+
+                <td className={styles.date}>
+                  {formatDate(item.movimentation_date)}
+                </td>
+
                 {(onEdit || onDelete) && (
                   <td>
                     <div className={styles.actions}>
+
                       {onEdit && (
-                        <button className={styles.actionBtn} onClick={() => onEdit(item)} aria-label="Editar">
+                        <button
+                          className={styles.actionBtn}
+                          onClick={() => onEdit(item)}
+                          aria-label="Editar"
+                        >
                           <i className="bi bi-pencil" />
                         </button>
                       )}
+
                       {onDelete && (
-                        <button className={`${styles.actionBtn} ${styles.deleteBtn}`} onClick={() => onDelete(item)} aria-label="Excluir">
+                        <button
+                          className={`${styles.actionBtn} ${styles.deleteBtn}`}
+                          onClick={() => onDelete(item)}
+                          aria-label="Excluir"
+                        >
                           <i className="bi bi-trash3" />
                         </button>
                       )}
+
                     </div>
                   </td>
                 )}
+
               </tr>
             );
           })}

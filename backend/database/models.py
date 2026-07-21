@@ -34,9 +34,10 @@ class Movimentations (base):
     movimentation_type = Column("movimentation_type", SAEnum(MovimentationType), nullable=False)
     movimentation_date = Column("movimentation_date", DateTime(timezone=True), server_default=func.now(), nullable=False)
 
-    def __init__ (self, user_id, amount, description, type, movimentation_type):
+    def __init__ (self, user_id, amount, description, type, movimentation_type, movimentation_date):
         self.user_id = user_id
         self.amount = amount
         self.description = description
         self.type = type
         self.movimentation_type = movimentation_type
+        self.movimentation_date = self.movimentation_date

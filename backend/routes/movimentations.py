@@ -10,23 +10,20 @@ movimentation_route = APIRouter(prefix="/movimentation", tags=["movimentaion"])
 
 @movimentation_route.post("", response_model=ResponseMovimentation)
 async def add_movimentation (movimentation: MovimentationSchema, current_user: User = Depends(get_current_user),session: Session = Depends(get_db)):
-    service = MovimentationServices(session)
-    return service.add_new_movimentation(movimentation, current_user)
-
+    service = MovimentationServices(current_user, session)
+    return service.add_new_movimentation (movimentation, current_user)
 
 @movimentation_route.get("", response_model=List[ResponseMovimentation])
 async def list_movimentation (current_user: User = Depends(get_current_user), session: Session = Depends(get_db)):
-    service = MovimentationServices(session)
+    service = MovimentationServices(current_user, session)
     return service.show_movimentations(current_user)
 
-
 @movimentation_route.put("/{id}", response_model=ResponseMovimentation)
-async def update_movimentation (id: int, movimentation: MovimentationSchema, session: Session = Depends(get_db)):
-    service = MovimentationServices(session)
-    return service.update_movimentation(id, movimentation)
-
+async def update_movimentation (id: int, movimentation: MovimentationSchema, current_user: User = Depends(get_current_user), session: Session = Depends(get_db)):
+    service = MovimentationServices(current_user, session)
+    return service.update_movimentation(id, movimentation, current_user)
 
 @movimentation_route.delete("/{id}")
-async def delete_movimentation (id: int, session: Session = Depends(get_db)):
-    service = MovimentationServices(session)
-    return service.remove_movimentation(id)
+async def delete_movimentation (id: int, current_user: User = Depends(get_current_user), session: Session = Depends(get_db)):
+    service = MovimentationServices(current_user, session)
+    return service.remove_movimentation(id, current_user)
