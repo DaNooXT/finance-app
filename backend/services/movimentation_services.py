@@ -1,17 +1,17 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
-from backend.repositories.movimentation_repositories import MovimentationRepository
-from backend.database.models import Movimentations
+from repositories.movimentation_repositories import MovimentationRepository
+from database.models import Movimentations
 
 class MovimentationServices:
 
     def __init__ (self, session: Session):
         self.repository = MovimentationRepository(session)
 
-    def add_new_movimentation (self, movimentation):
+    def add_new_movimentation (self, movimentation, current_user):
         try:
             new_movimentation = Movimentations(
-                user_id=movimentation.user_id,
+                user_id=current_user.id,
                 amount=movimentation.amount,
                 description=movimentation.description,
                 type=movimentation.type,
@@ -23,9 +23,9 @@ class MovimentationServices:
         return self.repository.create_movimentation(new_movimentation)
     
 
-    def show_all_movimentations (self):
+    def show_movimentations (self, current_user):
         try:
-            all_movimentations = self.repository.get_all_movimentations()
+            all_movimentations = self.repository.get_movimentations(current_user.id)
         except Exception as e:
             print(e)
             raise HTTPException(status_code=400, detail="Was not possible get all movimentations")

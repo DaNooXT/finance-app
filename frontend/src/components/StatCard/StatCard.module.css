@@ -1,0 +1,76 @@
+.stat {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.label {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.iconWrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background: var(--bg-elevated-2);
+  color: var(--text-secondary);
+}
+
+.iconWrap.brand { background: var(--brand-soft); color: var(--brand); }
+.iconWrap.danger { background: var(--danger-soft); color: var(--danger); }
+.iconWrap.neutral { background: var(--bg-elevated-2); color: var(--text-secondary); }
+
+.value {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  width: fit-content;
+}
+.trend.up { color: var(--brand); }
+.trend.down { color: var(--danger); }
+
+/* Signature element: hero balance card gets a quiet radial brand glow
+   anchored to the corner, and a larger figure to anchor the whole
+   dashboard's visual hierarchy. */
+.hero {
+  background: linear-gradient(160deg, var(--bg-elevated) 0%, var(--bg-elevated-2) 100%);
+  border-color: var(--border-strong);
+}
+
+.hero .value {
+  font-size: 2.15rem;
+}
+
+.heroGlow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, var(--brand-glow) 0%, transparent 70%);
+  opacity: 0.5;
+  pointer-events: none;
+}

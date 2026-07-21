@@ -1,8 +1,8 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from backend.repositories.auth_repositories import AuthRepository
-from backend.utils.jwt import create_token
-from backend.utils.authenticate_user import authenticate_user
+from repositories.auth_repositories import AuthRepository
+from utils.jwt import create_token
+from utils.authenticate_user import authenticate_user
 from datetime import timedelta
 
 
@@ -41,6 +41,11 @@ class AuthService:
         return {
             "access_token": access_token,
             "refresh_token": refresh_token,
+            "user": {
+                "id": auth_user.id,
+                "name": auth_user.name,
+                "email": auth_user.email
+            },
             "token_type": "bearer"
         }
     
@@ -48,6 +53,11 @@ class AuthService:
         access_token = create_token(user.id)
         return {
             "access_token": access_token,
+            "user": {
+                "id": user.id,
+                "name": user.name,
+                "email": user.email
+            },
             "token_type": "bearer"
         }
     

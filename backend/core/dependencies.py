@@ -1,10 +1,10 @@
 from fastapi import Depends, HTTPException
 from jose import jwt, JWTError, ExpiredSignatureError
-from backend.database.models import db
+from database.models import db
 from sqlalchemy.orm import Session, sessionmaker
-from backend.core.security import oauth2_schema
-from backend.core.config import  SECRET_KEY, ALGORITHM
-from backend.database.models import User
+from core.security import oauth2_schema
+from core.config import  SECRET_KEY, ALGORITHM
+from database.models import User
 
 def get_db (): 
     try:

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from backend.database.models import User
-from backend.core.security import crypt_context
+from database.models import User
+from core.security import crypt_context
 from fastapi import HTTPException
 
 def authenticate_user (user_db, password):

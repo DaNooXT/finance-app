@@ -1,0 +1,121 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 60px;
+  max-width: 460px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.brandMark {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--brand);
+  color: #06170c;
+  font-family: var(--font-display);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-primary);
+}
+
+.title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  margin: 0 0 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerText {
+  margin-top: 26px;
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.link {
+  color: var(--brand);
+  font-weight: 600;
+}
+.link:hover { text-decoration: underline; }
+
+.showcase {
+  position: relative;
+  background: var(--sidebar-bg);
+  border-left: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: flex-end;
+  padding: 60px;
+  overflow: hidden;
+}
+
+.showcaseGlow {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, var(--brand-glow) 0%, transparent 70%);
+  opacity: 0.4;
+}
+
+.showcaseContent {
+  position: relative;
+  max-width: 380px;
+}
+
+.quote {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.quoteSub {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 900px) {
+  .page { grid-template-columns: 1fr; }
+  .showcase { display: none; }
+  .panel { padding: 32px 20px; }
+}

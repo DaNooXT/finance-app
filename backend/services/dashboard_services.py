@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from backend.repositories.dashboard_repositories import DashboardRepository
-from backend.utils.date import get_current_month
+from repositories.dashboard_repositories import DashboardRepository
+from utils.date import get_current_month
 
 class DashboardService:
      

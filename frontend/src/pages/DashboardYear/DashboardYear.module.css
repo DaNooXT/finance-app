@@ -1,0 +1,51 @@
+.rankList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rankItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+}
+.rankItem:last-child { border-bottom: none; }
+
+.rankNumber {
+  width: 20px;
+  color: var(--text-tertiary);
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.rankDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.rankLabel {
+  flex: 1;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.rankValue {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.rankPercent {
+  color: var(--brand);
+  font-weight: 700;
+  font-size: 0.78rem;
+  width: 40px;
+  text-align: right;
+}

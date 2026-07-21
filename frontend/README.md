@@ -1,16 +1,39 @@
-# React + Vite
+# Finovo — Sistema de Controle Financeiro Pessoal
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React 19 + Vite + JavaScript + React Router DOM + Axios + Bootstrap 5 + Recharts.
 
-Currently, two official plugins are available:
+## Rodando localmente
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+O app abre em modo mock (dados fictícios em memória) — login aceita qualquer
+email + senha com 4+ caracteres.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Conectando sua API FastAPI
 
-## Expanding the Oxlint configuration
+1. Copie `.env.example` para `.env` e ajuste `VITE_API_URL` para a URL da sua API.
+2. Defina `VITE_USE_MOCK=false`.
+3. Cada arquivo em `src/services/` (AuthService, DashboardService,
+   MovimentationService) já contém a chamada Axios real comentada com
+   `// ---- Substituir pela chamada real ----`, esperando os seguintes
+   endpoints:
+   - `POST /login`
+   - `POST /register`
+   - `GET /dashboard/month?year=&month=`
+   - `GET /dashboard/year?year=`
+   - `GET /movimentations?year=&month=&category=&type=&search=&page=&pageSize=`
+   - `POST /movimentations`
+   - `PUT /movimentations/:id`
+   - `DELETE /movimentations/:id`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+O token JWT é salvo em `localStorage` e enviado automaticamente como
+`Authorization: Bearer <token>` em toda requisição (ver `src/services/api.js`).
+
+## Build de produção
+
+```bash
+npm run build
+```

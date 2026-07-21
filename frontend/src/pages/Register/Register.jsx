@@ -1,52 +1,119 @@
-import { useState } from "react";
-import { register } from "../../Service/authService";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Input from '../../components/Input/Input';
+import Button from '../../components/Button/Button';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import useAuth from '../../hooks/useAuth';
+import styles from '../Login/Login.module.css';
 
-function Register () {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+export default function Register() {
+  const { register } = useAuth();
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-    async function handleRegister (event) {
-        event.preventDefault();
-        const data = await register(name, email, password);
-        console.log(data);
+  const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError('');
+
+    if (!form.name || !form.email || !form.password) {
+      setError('Preencha todos os campos.');
+      return;
+    }
+    if (form.password.length < 6) {
+      setError('A senha deve ter pelo menos 6 caracteres.');
+      return;
+    }
+    if (form.password !== form.confirmPassword) {
+      setError('As senhas não coincidem.');
+      return;
     }
 
-    return (
-        <div>
-            <form onSubmit={handleRegister}>
-                <div>
-                    <label htmlFor="name"></label>
-                    <input type="text" 
-                        id="name" 
-                        placeholder="Type your name here"
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
+    setLoading(true);
+    try {
+      await register(form);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.message || 'Não foi possível criar sua conta.');
+    } finally {
+      setLoading(false);
+    }
+  }
 
-                <div>
-                    <label htmlFor="email"></label>
-                    <input type="email" 
-                        id="email" 
-                        placeholder="Type your email here"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="password"></label>
-                    <input type="password" 
-                        id="password" 
-                        placeholder="Type your Password here"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-
-                <button type="submit">
-                    Send
-                </button>
-            </form>
+  return (
+    <div className={styles.page}>
+      <div className={styles.panel}>
+        <div className={styles.brand}>
+          <span className={styles.brandMark}>F</span>
+          <span className={styles.brandName}>Finovo</span>
         </div>
-    )
-};
-export default Register;
+
+        <h1 className={`${styles.title} font-display`}>Crie sua conta</h1>
+        <p className={styles.subtitle}>Comece a organizar suas finanças em minutos.</p>
+
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <Input
+            label="Nome"
+            icon="bi-person"
+            value={form.name}
+            onChange={update('name')}
+            placeholder="Seu nome completo"
+            autoComplete="name"
+            required
+          />
+          <Input
+            label="Email"
+            type="email"
+            icon="bi-envelope"
+            value={form.email}
+            onChange={update('email')}
+            placeholder="voce@email.com"
+            autoComplete="email"
+            required
+          />
+          <Input
+            label="Senha"
+            type="password"
+            icon="bi-lock"
+            value={form.password}
+            onChange={update('password')}
+            placeholder="Mínimo 6 caracteres"
+            autoComplete="new-password"
+            required
+          />
+          <Input
+            label="Confirmar senha"
+            type="password"
+            icon="bi-lock-fill"
+            value={form.confirmPassword}
+            onChange={update('confirmPassword')}
+            placeholder="Repita a senha"
+            autoComplete="new-password"
+            required
+          />
+
+          <ErrorMessage>{error}</ErrorMessage>
+
+          <Button type="submit" full loading={loading}>
+            Criar conta
+          </Button>
+        </form>
+
+        <p className={styles.footerText}>
+          Já tem conta? <Link to="/login" className={styles.link}>Entrar</Link>
+        </p>
+      </div>
+
+      <div className={styles.showcase}>
+        <div className={styles.showcaseGlow} />
+        <div className={styles.showcaseContent}>
+          <span className={styles.quote}>"Cada real registrado é uma decisão mais consciente."</span>
+          <span className={styles.quoteSub}>Crie sua conta e comece hoje mesmo.</span>
+        </div>
+      </div>
+    </div>
+  );
+}

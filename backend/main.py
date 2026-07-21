@@ -16,9 +16,9 @@ app.add_middleware (
     allow_headers=["*"],
 )
 
-from backend.routes.auth import auth_route
-from backend.routes.movimentations import movimentation_route
-from backend.routes.dashboard import dashboard_route
+from routes.auth import auth_route
+from routes.movimentations import movimentation_route
+from routes.dashboard import dashboard_route
 
 app.include_router(auth_route)
 app.include_router(movimentation_route)

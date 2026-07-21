@@ -1,0 +1,21 @@
+.filtersCard {
+  margin-bottom: 16px;
+}
+
+.tableCard {
+  overflow: hidden;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.pageInfo {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+}

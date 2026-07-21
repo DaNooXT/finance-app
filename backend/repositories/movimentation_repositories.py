@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
-from backend.database.models import Movimentations
+from database.models import Movimentations, User
+
 
 class MovimentationRepository:
 
@@ -16,8 +17,11 @@ class MovimentationRepository:
         return movimentation
     
 
-    def get_all_movimentations (self):
-        all_movimentation = self.session.query(Movimentations).all()
+    def get_movimentations (self, user_id):
+        all_movimentation = (
+            self.session.query(Movimentations)
+            .filter( Movimentations.user_id == user_id)
+        ).all()
         return all_movimentation
     
 

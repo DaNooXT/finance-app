@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, create_engine, Enum as SAEnum, Numeric, ForeignKey, func, DateTime
 from sqlalchemy.orm import declarative_base
-from backend.database.enums import MovimentationCategories, MovimentationType
+from database.enums import MovimentationCategories, MovimentationType
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

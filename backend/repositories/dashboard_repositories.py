@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import asc, desc
-from backend.database.models import Movimentations
-from backend.database.enums import MovimentationCategories, MovimentationType
+from database.models import Movimentations
+from database.enums import MovimentationCategories, MovimentationType
 
 class DashboardRepository:
 
