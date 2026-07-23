@@ -1,11 +1,10 @@
 from sqlalchemy import Column, Integer, String, create_engine, Enum as SAEnum, Numeric, ForeignKey, func, DateTime
 from sqlalchemy.orm import declarative_base
 from database.enums import MovimentationCategories, MovimentationType
-import os
+from core.config import DATABASE_URL
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATABASE_URL = f"sqlite:///{BASE_DIR}/bank.db"
-db = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+db = create_engine(DATABASE_URL)
+
 
 base = declarative_base()
 
