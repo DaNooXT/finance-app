@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.jsx';
-import Button from '../../components/Button/Button.jsx';
+import Button from '../../components/button/Button.jsx';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.jsx';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth.js';
 import styles from '../Login/Login.module.css';
 
 export default function Register() {

@@ -1,4 +1,4 @@
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth.js';
 import styles from './Header.module.css';
 
 const WEEKDAYS = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
