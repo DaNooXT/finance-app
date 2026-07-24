@@ -6,7 +6,7 @@ import PieChart from '../../components/PieChart/PieChart';
 import BarChart from '../../components/BarChart/BarChart';
 import Table from '../../components/Table/Table';
 import InfoCard from '../../components/InfoCard/InfoCard';
-import NavigatorBar from '../../components/Navbar/NavBar.jsx';
+import NavigatorBar from '../../components/NavBar/NavBar';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import DashboardService from '../../services/DashboardService';
 import { formatCurrency, formatDate, MONTHS_PT } from '../../utils/formatters';

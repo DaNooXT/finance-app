@@ -6,7 +6,7 @@ import PieChart from '../../components/PieChart/PieChart';
 import BarChart from '../../components/BarChart/BarChart';
 import Table from '../../components/Table/Table';
 import InfoCard from '../../components/InfoCard/InfoCard';
-import NavigatorBar from '../../components/Navbar/Navbar';
+import NavigatorBar from '../../components/NavBar/NavBar';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import DashboardService from '../../services/DashboardService';
 import { formatCurrency, formatPercent } from '../../utils/formatters';
