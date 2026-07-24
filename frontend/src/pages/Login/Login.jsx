@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
-import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import Input from '../../components/Input/Input.jsx';
+import Button from '../../components/Button/Button.jsx';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.jsx';
 import useAuth from '../../hooks/useAuth';
 import styles from './Login.module.css';
 

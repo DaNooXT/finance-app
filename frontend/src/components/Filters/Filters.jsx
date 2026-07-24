@@ -1,6 +1,6 @@
-import { CATEGORIES } from '../../utils/categories';
-import { MONTHS_PT } from '../../utils/formatters';
-import SearchInput from '../SearchInput/SearchInput';
+import { CATEGORIES } from '../../utils/categories.js';
+import { MONTHS_PT } from '../../utils/formatters.js';
+import SearchInput from '../SearchInput/SearchInput.jsx';
 import styles from './Filters.module.css';
 
 export default function Filters({ filters, onChange, years }) {

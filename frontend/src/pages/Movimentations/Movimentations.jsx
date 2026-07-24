@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import PageTitle from '../../components/PageTitle/PageTitle';
-import Card from '../../components/Card/Card';
-import Button from '../../components/Button/Button';
-import Filters from '../../components/Filters/Filters';
-import Table from '../../components/Table/Table';
-import ModalMovimentation from '../../components/ModalMovimentation/ModalMovimentation';
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
-import { useToast } from '../../components/Toast/ToastProvider';
-import MovimentationService from '../../services/MovimentationService';
+import PageTitle from '../../components/PageTitle/PageTitle.jsx';
+import Card from '../../components/Card/Card.jsx';
+import Button from '../../components/Button/Button.jsx';
+import Filters from '../../components/Filters/Filters.jsx';
+import Table from '../../components/Table/Table.jsx';
+import ModalMovimentation from '../../components/ModalMovimentation/ModalMovimentation.jsx';
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal.jsx';
+import { useToast } from '../../components/Toast/ToastProvider.jsx';
+import MovimentationService from '../../services/MovimentationService.js';
 import '../../styles/global.css';
 import styles from './Movimentations.module.css';
 

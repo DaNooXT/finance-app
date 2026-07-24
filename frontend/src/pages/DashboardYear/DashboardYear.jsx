@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import PageTitle from '../../components/PageTitle/PageTitle';
-import StatCard from '../../components/StatCard/StatCard';
-import ChartCard from '../../components/ChartCard/ChartCard';
-import PieChart from '../../components/PieChart/PieChart';
-import BarChart from '../../components/BarChart/BarChart';
-import Table from '../../components/Table/Table';
-import InfoCard from '../../components/InfoCard/InfoCard';
-import NavigatorBar from '../../components/NavBar/NavBar';
-import Skeleton from '../../components/Skeleton/Skeleton';
-import DashboardService from '../../services/DashboardService';
-import { formatCurrency, formatPercent } from '../../utils/formatters';
+import PageTitle from '../../components/PageTitle/PageTitle.jsx';
+import StatCard from '../../components/StatCard/StatCard.jsx';
+import ChartCard from '../../components/ChartCard/ChartCard.jsx';
+import PieChart from '../../components/PieChart/PieChart.jsx';
+import BarChart from '../../components/BarChart/BarChart.jsx';
+import Table from '../../components/Table/Table.jsx';
+import InfoCard from '../../components/InfoCard/InfoCard.jsx';
+import NavigatorBar from '../../components/NavBar/NavBar.jsx';
+import Skeleton from '../../components/Skeleton/Skeleton.jsx';
+import DashboardService from '../../services/DashboardService.js';
+import { formatCurrency, formatPercent } from '../../utils/formatters.js';
 import '../../styles/global.css';
 import styles from './DashboardYear.module.css';
 

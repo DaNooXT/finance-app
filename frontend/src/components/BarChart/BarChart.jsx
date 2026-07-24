@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts';
-import { formatCurrency } from '../../utils/formatters';
+import { formatCurrency } from '../../utils/formatters.js';
 import styles from './BarChart.module.css';
 
 function CustomTooltip({ active, payload, label }) {

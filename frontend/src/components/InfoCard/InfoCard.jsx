@@ -1,4 +1,4 @@
-import Card from '../Card/Card';
+import Card from '../Card/Card.jsx';
 import styles from './InfoCard.module.css';
 
 export default function InfoCard({ icon, label, value, sub }) {

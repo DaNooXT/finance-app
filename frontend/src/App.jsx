@@ -1,17 +1,17 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import ThemeProvider from './context/ThemeProvider';
-import AuthProvider from './context/AuthProvider';
-import { ToastProvider } from './components/Toast/ToastProvider';
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import MainLayout from './layouts/MainLayout';
+import ThemeProvider from './context/ThemeProvider.jsx';
+import AuthProvider from './context/AuthProvider.jsx';
+import { ToastProvider } from './components/Toast/ToastProvider.jsx';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
+import MainLayout from './layouts/MainLayout.jsx';
 
-import Login from './pages/Login/Login';
-import Register from './pages/Register/Register';
-import Dashboard from './pages/Dashboard/Dashboard';
-import DashboardYear from './pages/DashboardYear/DashboardYear';
-import Movimentations from './pages/Movimentations/Movimentations';
-import Profile from './pages/Profile/Profile';
-import SecretImage from "./components/SecretImage/SecretImage";
+import Login from './pages/Login/Login.jsx';
+import Register from './pages/Register/Register.jsx';
+import Dashboard from './pages/Dashboard/Dashboard.jsx';
+import DashboardYear from './pages/DashboardYear/DashboardYear.jsx';
+import Movimentations from './pages/Movimentations/Movimentations.jsx';
+import Profile from './pages/Profile/Profile.jsx';
+import SecretImage from "./components/SecretImage/SecretImage.jsx";
 
 export default function App() {
   return (

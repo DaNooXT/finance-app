@@ -1,5 +1,5 @@
 import { PieChart as RePieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
-import { formatCurrency, formatPercent } from '../../utils/formatters';
+import { formatCurrency, formatPercent } from '../../utils/formatters.js';
 import styles from './PieChart.module.css';
 
 function CustomTooltip({ active, payload }) {

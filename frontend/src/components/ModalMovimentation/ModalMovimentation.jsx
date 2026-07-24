@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { CATEGORIES } from '../../utils/categories';
-import Button from '../Button/Button';
-import Input from '../Input/Input';
+import { CATEGORIES } from '../../utils/categories.js';
+import Button from '../Button/Button.jsx';
+import Input from '../Input/Input.jsx';
 import styles from './ModalMovimentation.module.css';
 
 const EMPTY_FORM = {

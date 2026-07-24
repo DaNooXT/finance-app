@@ -1,7 +1,7 @@
-import { getCategory } from '../../utils/categories';
-import { formatCurrency, formatDate } from '../../utils/formatters';
-import EmptyState from '../EmptyState/EmptyState';
-import Skeleton from '../Skeleton/Skeleton';
+import { getCategory } from '../../utils/categories.js';
+import { formatCurrency, formatDate } from '../../utils/formatters.js';
+import EmptyState from '../EmptyState/EmptyState.jsx';
+import Skeleton from '../Skeleton/Skeleton.jsx';
 import styles from './Table.module.css';
 
 export default function Table({ items, loading, onEdit, onDelete, simple = false }) {

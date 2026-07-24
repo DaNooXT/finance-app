@@ -1,4 +1,4 @@
-import Card from '../Card/Card';
+import Card from '../Card/Card.jsx';
 import styles from './ChartCard.module.css';
 
 export default function ChartCard({ title, subtitle, action, children, height }) {

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import useTheme from '../../hooks/useTheme';
+import useTheme from '../../hooks/useTheme.js';
 import styles from './Sidebar.module.css';
 
 const NAV_ITEMS = [

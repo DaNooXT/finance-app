@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import ThemeContext from './ThemeContext';
+import ThemeContext from './ThemeContext.js';
 
 const STORAGE_KEY = 'finovo_theme';
 

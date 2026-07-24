@@ -1,4 +1,4 @@
-import Card from '../Card/Card';
+import Card from '../Card/Card.jsx';
 import styles from './StatCard.module.css';
 
 export default function StatCard({ label, value, icon, trend, tone = 'neutral', hero = false }) {
