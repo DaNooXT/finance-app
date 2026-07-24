@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CATEGORIES } from '../../utils/categories.js';
-import Button from '../Button/Button.jsx';
+import Button from '../button/Button.jsx';
 import Input from '../Input/Input.jsx';
 import styles from './ModalMovimentation.module.css';
 

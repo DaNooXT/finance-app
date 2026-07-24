@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PageTitle from '../../components/PageTitle/PageTitle.jsx';
 import Card from '../../components/Card/Card.jsx';
-import Button from '../../components/Button/Button.jsx';
+import Button from '../../components/button/Button.jsx';
 import Filters from '../../components/Filters/Filters.jsx';
 import Table from '../../components/Table/Table.jsx';
 import ModalMovimentation from '../../components/ModalMovimentation/ModalMovimentation.jsx';
