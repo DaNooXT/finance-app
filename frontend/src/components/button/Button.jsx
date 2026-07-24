@@ -11,6 +11,7 @@ export default function Button({
   full = false,
   onClick,
   className = '',
+  
 }) {
   return (
     <button
