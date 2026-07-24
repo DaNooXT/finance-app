@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Card from '../../components/Card/Card';
 import PageTitle from '../../components/PageTitle/PageTitle';
 import Input from '../../components/Input/Input';
-import Button from '../../components/button/Button';
+import Button from '../../components/button/Button.jsx';
 import useAuth from '../../hooks/useAuth';
 import useTheme from '../../hooks/useTheme';
 import { useToast } from '../../components/Toast/ToastProvider';
