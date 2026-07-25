@@ -34,18 +34,26 @@ export default function Movimentations() {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   async function loadData() {
-      setLoading(true);
+    setLoading(true);
 
+    try {
       const res = await MovimentationService.getMovimentations(filters);
+      const items = Array.isArray(res) ? res : res.items ?? [];
+      const total = Array.isArray(res) ? items.length : res.total ?? items.length;
+      const pageSize = Number(filters.pageSize) || 8;
+      const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
       setResult({
-        items: res,
-        total: res.length,
-        totalPages: 1,
-        page: 1
+        items,
+        total,
+        totalPages,
+        page: Number(filters.page) || 1,
       });
-
+    } catch {
+      setResult({ items: [], total: 0, totalPages: 1, page: 1 });
+    } finally {
       setLoading(false);
+    }
   }
 
   useEffect(() => {

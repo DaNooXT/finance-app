@@ -39,4 +39,4 @@ class Movimentations (base):
         self.description = description
         self.type = type
         self.movimentation_type = movimentation_type
-        self.movimentation_date = self.movimentation_date
+        self.movimentation_date = movimentation_date

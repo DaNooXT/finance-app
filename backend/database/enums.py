@@ -17,3 +17,6 @@ class MovimentationCategories (str, Enum):
     GIFTS = "gifts"
     OTHERS = "others"
     SALARY = "salary"
+    SPORT = "sport"
+    RESERVE = "reserve"
+    EDUCATION = "education"

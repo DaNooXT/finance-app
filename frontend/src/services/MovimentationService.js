@@ -7,9 +7,11 @@ const MovimentationService = {
       params: filters,
     });
 
-    console.log(data)
+    if (Array.isArray(data)) {
+      return data;
+    }
 
-    return data;
+    return data.items ?? [];
   },
 
   async createMovimentation(payload) {

@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from repositories.movimentation_repositories import MovimentationRepository
 from database.models import Movimentations
+from datetime import date, datetime
 
 class MovimentationServices:
 
@@ -10,13 +11,17 @@ class MovimentationServices:
 
     def add_new_movimentation (self, movimentation, current_user):
         try:
+            movimentation_date = movimentation.movimentation_date
+            if isinstance(movimentation_date, date) and not isinstance(movimentation_date, datetime):
+                movimentation_date = datetime.combine(movimentation_date, datetime.min.time())
+
             new_movimentation = Movimentations(
                 user_id=current_user.id,
                 amount=movimentation.amount,
                 description=movimentation.description,
                 type=movimentation.type,
                 movimentation_type=movimentation.movimentation_type,
-                movimentation_date=movimentation.movimentation_date
+                movimentation_date=movimentation_date
             )
         except Exception as e:
             print(e)
@@ -24,9 +29,9 @@ class MovimentationServices:
         return self.repository.create_movimentation(new_movimentation)
     
 
-    def show_movimentations (self, current_user):
+    def show_movimentations (self, filters, current_user):
         try:
-            all_movimentations = self.repository.get_movimentations(current_user.id)
+            all_movimentations = self.repository.get_movimentations(filters, current_user.id)
         except Exception as e:
             print(e)
             raise HTTPException(status_code=400, detail="Was not possible get all movimentations")
